@@ -1,0 +1,10 @@
+{
+    "program": "zenet.aleo",
+    "version": "0.0.0",
+    "description": "",
+    "development": {
+        "private_key": "APrivateKey1zkpDeZxA8xnQVchhKfA74kjLUYDTQ5XsLkHvMbxarzaosQt",
+        "address": "aleo10jfhm5jjg7fdgpeapdfxp8eeevfdulxm595z8w5vryevu3cgpg8qwl5r2g"
+    },
+    "license": "MIT"
+}
