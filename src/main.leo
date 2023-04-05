@@ -8,8 +8,11 @@ program zenet.aleo {
 
     // Returns true if i-th bit of number is 1
     inline get_bit(number: u32, i: u8) -> bool {
-        let mask: u32 = 2u32 ** i;
-        return number.and(mask) > 0u32;
+        // The bug happens with either of these two ways of calculating the mask:
+        // let mask: u32 = 2u32 ** i;
+        let mask: u32 = 1u32 << i;
+        // return number.and(mask) > 0u32;
+        return true;
     }
 
     // Returns occupant of i-th cell according to the following convention:
@@ -78,7 +81,7 @@ program zenet.aleo {
     function piece_is_protected(board: Board, cell: u8) -> bool {
         let player: u8 = get_cell_occupant(board, cell);
         assert(player != 0u8);              // The cell is not empty
-        if (26u8 <= cell && cell <=30u8) {
+        if (26u8 <= cell && cell <= 30u8) {
             return true;                    // Pieces on cells 26 through 30 are always protected    
         }
         assert(1u8 < cell && cell < 26u8); // It makes no sense to check for protectedness for cells outside this range
@@ -91,7 +94,7 @@ program zenet.aleo {
         }
     }
 
-    function exchange_pieces(board: Board, cell1: u8, cell2: u8) {
+    inline exchange_pieces(board: Board, cell1: u8, cell2: u8) {
         let occ1: u8 = get_cell_occupant(board, cell1);
         let occ2: u8 = get_cell_occupant(board, cell2);
         set_cell_occupant(board, cell1, occ2);
