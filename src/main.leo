@@ -15,6 +15,18 @@ program zenet.aleo {
         return true;
     }
 
+    inline set_bit(number: u32, i: u8, bit: bool) -> u32{
+        // The bug happens with either of these two ways of calculating the mask:
+        // let mask: u32 = 2u32 ** i;
+        let mask: u32 = 1u32 << i;
+        // if bit {
+        //     return number.or(mask);
+        // } else {
+        //     return number.and(mask.not());
+        // }
+        return 0u32;
+    }
+
     // Returns occupant of i-th cell according to the following convention:
     // i-th cell is empty: returns 0u8
     // i-th cell is occupied by player 1: returns 1u8
@@ -26,6 +38,16 @@ program zenet.aleo {
         } else {
             return 0u8;
         }
+    }
+
+    function set_cell_occupant(board: Board, cell: u8, occ: u8) -> Board {
+        assert(occ == 1u8 || occ == 2u8);  // Occupant can only be player1 or player2
+        let bit : bool = occ == 0u8;
+        return Board {
+            cell_state: board.cell_state,
+            occupant: set_bit(board.occupant, cell, bit),
+            p1_turn: board.p1_turn,
+        };
     }
 
     inline get_cell_type(i: u8) -> u8 {
@@ -68,7 +90,11 @@ program zenet.aleo {
         assert(get_cell_occupant(board, target_cell) != player); // Target cell doesn't contain a piece from current player
         if get_cell_occupant(board, target_cell) == opponent(player) { // If the target cell contains a piece from the opponent player
             if ! piece_is_protected(board, target_cell) { // If the target cell doesn't contain a protected piece
-                exchange_pieces(board, origin_cell, target_cell); // Exchange player1's and player2's pieces
+                // Exchange pieces
+                let occ1: u8 = get_cell_occupant(board, origin_cell);
+                let occ2: u8 = get_cell_occupant(board, target_cell);
+                board = set_cell_occupant(board, origin_cell, occ2);
+                board = set_cell_occupant(board, target_cell, occ1);
             } else {
                 // Return some error
             }
@@ -92,17 +118,6 @@ program zenet.aleo {
         } else {
             return false;
         }
-    }
-
-    inline exchange_pieces(board: Board, cell1: u8, cell2: u8) {
-        let occ1: u8 = get_cell_occupant(board, cell1);
-        let occ2: u8 = get_cell_occupant(board, cell2);
-        set_cell_occupant(board, cell1, occ2);
-        set_cell_occupant(board, cell2, occ1);
-    }
-
-    inline set_cell_occupant(board: Board, cell: u8, occ: u8) {
-
     }
 
 }
