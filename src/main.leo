@@ -102,8 +102,13 @@ program zenet.aleo {
         };
     }
 
+    function xnor(x: bool, y: bool) -> bool {
+        return ! (x && !y) || (!x && y); 
+    }
+
     transition make_move(origin_cell: u8, dice: u8, board: Board) -> (Board, Result) {
         let player: u8 = get_cell_occupant(board, origin_cell);
+        assert(xnor(board.p1_turn, player == 1u8)); // It's the correct player's turn
         let target_cell: u8 = origin_cell + dice;
         assert(player == 1u8 || player == 2u8); // Player ID is valid 
         assert(1u8 <= dice && dice <= 5u8); // Dice result is valid
