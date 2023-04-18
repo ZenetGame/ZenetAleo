@@ -1,9 +1,16 @@
 program zenet.aleo {
 
-    struct Board {
-        cell_state: u32,
+    struct Cells {
+        state: u32,
         occupant: u32,
-        p1_turn: bool,
+    }
+
+    record Board {
+        owner: address,
+        gates: u64,
+        cell_state: u32,
+        cell_occ: u32,
+        p1_turn: bool
     }
 
     struct Result {
@@ -33,26 +40,24 @@ program zenet.aleo {
     inline get_cell_occupant(board: Board, i: u8) -> u8 {
         let is_occupied: bool = get_bit(board.cell_state, i);
         if is_occupied {
-            return get_bit(board.occupant, i) ? 2u8 : 1u8;
+            return get_bit(board.cell_occ, i) ? 2u8 : 1u8;
         } else {
             return 0u8;
         }
     }
 
-    inline set_cell_occupant(board: Board, cell: u8, occ: u8) -> Board {
+    inline set_cell_occupant(cells: Cells, cell: u8, occ: u8) -> Cells {
         let bit: bool = occ == 2u8;  // if occ==1u8 (player1) then bit=0, if occ==2u8 (player2) then bit=1;
-        return Board {
-            cell_state: set_bit(board.cell_state, cell, true), // the cell is now occupied by a player, thus cell_state = 1
-            occupant: set_bit(board.occupant, cell, bit),
-            p1_turn: board.p1_turn,
+        return Cells {
+            state: set_bit(cells.state, cell, true), // the cell is now occupied by a player, thus cell_state = 1
+            occupant: set_bit(cells.occupant, cell, bit),
         };
     }
 
-    inline clear_cell (board: Board, cell: u8) -> Board {
-        return Board {
-            cell_state: set_bit(board.cell_state, cell, false),
-            occupant: set_bit(board.occupant, cell, false),
-            p1_turn: board.p1_turn,
+    inline clear_cell(cells: Cells, cell: u8) -> Cells {
+        return Cells {
+            state: set_bit(cells.state, cell, false),
+            occupant: set_bit(cells.occupant, cell, false),
         };
     }
 
@@ -88,17 +93,11 @@ program zenet.aleo {
 
     transition new() -> Board {
         return Board {
+            owner: self.caller,
+            gates: 0u64,
             cell_state: 1023u32, // 00 0000000000 0000000000 1111111111
-            occupant: 682u32, // 00 0000000000 0000000000 1010101010
+            cell_occ: 682u32, // 00 0000000000 0000000000 1010101010
             p1_turn: true, // player 1 always starts
-        };
-    }
-
-    function change_player(board: Board) -> Board {
-        return Board {
-            cell_state: board.cell_state, // 00 0000000000 0000000000 1111111111
-            occupant: board.occupant, // 00 0000000000 0000000000 1010101010
-            p1_turn: ! board.p1_turn, // player 1 always starts
         };
     }
 
@@ -116,25 +115,36 @@ program zenet.aleo {
         let target_cell_occupant: u8 = get_cell_occupant(board, target_cell);
         assert(target_cell_occupant != player); // Target cell doesn't contain a piece from current player
         let valid_move: bool = true;
+        let cells: Cells = Cells {state: board.cell_state, occupant: board.cell_occ };
         if target_cell_occupant == 0u8 {  // If target cell is empty
-            board = move_piece(board, origin_cell, target_cell); // Move player's piece from the origin cell to the target cell
+            cells = move_piece(board, origin_cell, target_cell); // Move player's piece from the origin cell to the target cell
         } else { // If the target cell contains a piece from the opponent player
             if ! piece_is_protected(board, target_cell) { // If the target cell doesn't contain a protected piece
-                board = exchange_pieces(board, origin_cell, target_cell); // Exchange player1's and player2's pieces
+                cells = exchange_pieces(board, origin_cell, target_cell); // Exchange player1's and player2's pieces
             } else {
                 valid_move = false;
             }
         }
-        let new_board: Board = board;
+        let next_turn: bool = board.p1_turn;
         if dice == 2u8 || dice == 3u8 {    // If dice is 2 or 3, the other player plays. If it's 1, 4 or 5, the same player plays again
-            new_board = change_player(board);
+            next_turn = ! board.p1_turn;
         }
-        let result: Result = Result{valid_move: valid_move};
-        if valid_move {
-            return (new_board, result);
-        } else {
-            return (board, result);
+        if ! valid_move {
+            next_turn = board.p1_turn;
         }
+        return (
+                Board {
+                    owner: board.owner,
+                    gates: board.gates,
+                    cell_state: cells.state,
+                    cell_occ: cells.occupant,
+                    p1_turn: next_turn,
+                },
+                Result {
+                    valid_move: valid_move
+                }
+            );
+
     }
 
     function piece_is_protected(board: Board, cell: u8) -> bool {
@@ -151,19 +161,21 @@ program zenet.aleo {
         }
     }
 
-    function move_piece(board: Board, origin_cell: u8, target_cell: u8) -> Board {
+    function move_piece(board: Board, origin_cell: u8, target_cell: u8) -> Cells {
         let occ: u8 = get_cell_occupant(board, origin_cell);
-        board = set_cell_occupant(board, target_cell, occ);
-        board = clear_cell (board, origin_cell);
-        return board;
+        let cells: Cells = Cells {state: board.cell_state, occupant: board.cell_occ };
+        cells = set_cell_occupant(cells, target_cell, occ);
+        cells = clear_cell(cells, origin_cell);
+        return cells;
     }
 
-    function exchange_pieces(board: Board, origin_cell: u8, target_cell: u8) -> Board {
+    function exchange_pieces(board: Board, origin_cell: u8, target_cell: u8) -> Cells {
         let origin_cell_occ: u8 = get_cell_occupant(board, origin_cell);
         let target_cell_occ: u8 = get_cell_occupant(board, target_cell);
-        board = set_cell_occupant(board, origin_cell, target_cell_occ);
-        board = set_cell_occupant(board, target_cell, origin_cell_occ);
-        return board;
+        let cells: Cells = Cells {state: board.cell_state, occupant: board.cell_occ };
+        cells = set_cell_occupant(cells, origin_cell, target_cell_occ);
+        cells = set_cell_occupant(cells, target_cell, origin_cell_occ);
+        return cells;
      }
 
 }
