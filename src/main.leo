@@ -1,10 +1,5 @@
 program zenet.aleo {
 
-    struct Cells {
-        state: u32,
-        occupant: u32,
-    }
-
     record Board {
         owner: address,
         gates: u64,
@@ -12,6 +7,11 @@ program zenet.aleo {
         cell_occ: u32,
         p1: address,
         p2: address
+    }
+
+    struct Cells {
+        state: u32,
+        occupant: u32,
     }
 
     // Returns true if i-th bit of 'number' is '1'
@@ -86,18 +86,6 @@ program zenet.aleo {
         }
     }
 
-    transition new(opponent: address) -> Board {
-        let opponent_address: address = opponent;
-        return Board {
-            owner: self.caller,
-            gates: 0u64,
-            cell_state: 1023u32, // 00 0000000000 0000000000 1111111111
-            cell_occ: 682u32, // 00 0000000000 0000000000 1010101010
-            p1: self.caller,
-            p2: opponent_address,
-        };
-    }
-
     function xor_(x: bool, y: bool) -> bool {
         return (x && !y) || (!x && y); 
     }
@@ -111,41 +99,6 @@ program zenet.aleo {
         } else {
             return false;
         }
-    }
-
-
-    transition make_move(origin_cell: u8, dice: u8, board: Board) -> Board {
-        assert(piece_is_valid(origin_cell, board));
-        assert(1u8 <= dice && dice <= 5u8); // Dice result is valid
-        let player: u8 = get_cell_occupant(board, origin_cell);
-        assert(player == 1u8 || player == 2u8); // The origin cell is not empty
-        assert(! xor_(board.owner == board.p1, player == 1u8)); // The piece to be moved belongs to the current player
-        let target_cell: u8 = origin_cell + dice;
-        let target_cell_occupant: u8 = get_cell_occupant(board, target_cell);
-        assert(target_cell_occupant != player); // Target cell doesn't contain a piece from current player
-        let target_empty: bool = target_cell_occupant == 0u8; 
-        let protected: bool = piece_is_protected(board, target_cell);
-        let valid_move: bool = !target_empty && !protected || target_empty && !protected;
-        assert( valid_move );
-        let cells: Cells = Cells {state: board.cell_state, occupant: board.cell_occ };
-        if target_empty {  // If target cell is empty
-            cells = move_piece(board, origin_cell, target_cell); // Move player's piece from the origin cell to the target cell
-        } else { // If the target cell contains a piece from the opponent player
-            cells = exchange_pieces(board, origin_cell, target_cell); // Exchange player1's and player2's pieces
-        }
-        let next_player: address = board.owner;
-        if dice == 2u8 || dice == 3u8 {    // If dice is 2 or 3, the other player plays. If it's 1, 4 or 5, the same player plays again
-            next_player = get_opponent(board);
-        }
-        return Board {
-                    owner: next_player,
-                    gates: board.gates,
-                    cell_state: cells.state,
-                    cell_occ: cells.occupant,
-                    p1: board.p1,
-                    p2: board.p2
-                };
-
     }
 
     function piece_is_protected(board: Board, cell: u8) -> bool {
@@ -181,5 +134,51 @@ program zenet.aleo {
         cells = set_cell_occupant(cells, target_cell, origin_cell_occ);
         return cells;
      }
+
+    transition new(opponent: address) -> Board {
+        let opponent_address: address = opponent;
+        return Board {
+            owner: self.caller,
+            gates: 0u64,
+            cell_state: 1023u32, // 00 0000000000 0000000000 1111111111
+            cell_occ: 682u32, // 00 0000000000 0000000000 1010101010
+            p1: self.caller,
+            p2: opponent_address,
+        };
+    }
+
+    transition make_move(origin_cell: u8, dice: u8, board: Board) -> Board {
+        assert(piece_is_valid(origin_cell, board));
+        assert(1u8 <= dice && dice <= 5u8); // Dice result is valid
+        let player: u8 = get_cell_occupant(board, origin_cell);
+        assert(player == 1u8 || player == 2u8); // The origin cell is not empty
+        assert(! xor_(board.owner == board.p1, player == 1u8)); // The piece to be moved belongs to the current player
+        let target_cell: u8 = origin_cell + dice;
+        let target_cell_occupant: u8 = get_cell_occupant(board, target_cell);
+        assert(target_cell_occupant != player); // Target cell doesn't contain a piece from current player
+        let target_empty: bool = target_cell_occupant == 0u8; 
+        let protected: bool = piece_is_protected(board, target_cell);
+        let valid_move: bool = !target_empty && !protected || target_empty && !protected;
+        assert( valid_move );
+        let cells: Cells = Cells {state: board.cell_state, occupant: board.cell_occ };
+        if target_empty {  // If target cell is empty
+            cells = move_piece(board, origin_cell, target_cell); // Move player's piece from the origin cell to the target cell
+        } else { // If the target cell contains a piece from the opponent player
+            cells = exchange_pieces(board, origin_cell, target_cell); // Exchange player1's and player2's pieces
+        }
+        let next_player: address = board.owner;
+        if dice == 2u8 || dice == 3u8 {    // If dice is 2 or 3, the other player plays. If it's 1, 4 or 5, the same player plays again
+            next_player = get_opponent(board);
+        }
+        return Board {
+                    owner: next_player,
+                    gates: board.gates,
+                    cell_state: cells.state,
+                    cell_occ: cells.occupant,
+                    p1: board.p1,
+                    p2: board.p2
+                };
+
+    }
 
 }
