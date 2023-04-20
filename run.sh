@@ -91,6 +91,11 @@ leo run make_move 9u8 3u8 "{
   p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
   _nonce: 7890800848858615990577674120820649470995847806539552791604837931200094078541group.public
+}" "{
+  owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
+  gates: 0u64.private,
+  positions: 0u32.private,
+  _nonce: 1260228892496565700320197992505338749301641373211925149244050801561814298023group.public
 }"
 
 # Player 2 throws a 1 with their dice.
@@ -115,6 +120,11 @@ leo run make_move 10u8 1u8 "{
   p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
   _nonce: 1004757177813353300822404771547701633947006730478073655279174959646155183747group.public
+}" "{
+  owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
+  gates: 0u64.private,
+  positions: 0u32.private,
+  _nonce: 1464789014133543903436410348591640130929288960599214445445608713474398327142group.public
 }"
 
 # Player 2 plays again because they threw a 1.
@@ -138,6 +148,11 @@ leo run make_move 11u8 1u8 "{
   p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
   _nonce: 4690870848934773469079502278409118772518817469594601138224794335084520280518group.public
+}" "{
+  owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
+  gates: 0u64.private,
+  positions: 0u32.private,
+  _nonce: 1606512803048065953766948189257325132397836525666027848578385724640293241640group.public
 }"
 
 # Player 2 plays again because they threw a 1.
@@ -161,6 +176,11 @@ leo run make_move 8u8 5u8 "{
   p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
   _nonce: 6253988530938785790439441431526714595230824765720776138754054138472794167427group.public
+}" "{
+  owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
+  gates: 0u64.private,
+  positions: 0u32.private,
+  _nonce: 4426926602005420266758862757591267950064155702590367142536192932884302440994group.public
 }"
 
 # Player 2 plays again because they threw a 5.
@@ -184,6 +204,11 @@ leo run make_move 6u8 2u8 "{
   p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
   _nonce: 1360964342624937223480310004498861222944995430813378620449009068059298906317group.public
+}" "{
+  owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
+  gates: 0u64.private,
+  positions: 0u32.private,
+  _nonce: 2389059089589441525145242263596535991557463561238588856227080122238976155581group.public
 }"
 
 # Player 1 plays next
@@ -208,6 +233,11 @@ leo run make_move 7u8 1u8 "{
   p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
   _nonce: 4648419441858357408883486902975267928571056081285772427130512948096998661477group.public
+}" "{
+  owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
+  gates: 0u64.private,
+  positions: 0u32.private,
+  _nonce: 1260228892496565700320197992505338749301641373211925149244050801561814298023group.public
 }"
 
 # Player 1 plays again because they threw a 1. This time the move is invalid because
@@ -232,6 +262,11 @@ leo run make_move 11u8 1u8 "{
   p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
   _nonce: 3948426659535155817986387150244593916337145649397527561770766560222778603929group.public
+}" "{
+  owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
+  gates: 0u64.private,
+  positions: 0u32.private,
+  _nonce: 2099817637539537283021802017101753525418623710989851309883267501444222856781group.public
 }"
 
 # Because the previous move was invalid, Player 1 tries a different move with the same dice roll.
@@ -255,6 +290,11 @@ leo run make_move 8u8 1u8 "{
   p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
   _nonce: 3948426659535155817986387150244593916337145649397527561770766560222778603929group.public
+}" "{
+  owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
+  gates: 0u64.private,
+  positions: 0u32.private,
+  _nonce: 2099817637539537283021802017101753525418623710989851309883267501444222856781group.public
 }"
 
 # Player 1 plays again because they threw a 1.
@@ -278,6 +318,11 @@ leo run make_move 11u8 3u8 "{
   p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
   _nonce: 4666265433961380448505648614738966685722508005289322014626060572623089873655group.public
+}" "{
+  owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
+  gates: 0u64.private,
+  positions: 0u32.private,
+  _nonce: 2790178789406900946219076845702115358906487119661751887534651560275067222863group.public
 }"
 
 # Player 2 plays next.
@@ -302,5 +347,10 @@ leo run make_move 13u8 3u8 "{
   p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
   _nonce: 5731086421104771502536010217708377290136681316803967986602526194450695880466group.public
+}" "{
+  owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
+  gates: 0u64.private,
+  positions: 0u32.private,
+  _nonce: 2389059089589441525145242263596535991557463561238588856227080122238976155581group.public
 }"
 
