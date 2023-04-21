@@ -117,7 +117,7 @@ To compile this Leo program, run:
 leo build
 ```
 
-## How to Run
+## Sample Gameplay
 
 ### 1. Initializing the players
 
@@ -196,11 +196,11 @@ leo run new $PLAYER2_ADDRESS
        Leo ✅ Executed 'zenet.aleo/new'
 ```
 
-There are three outputs here: the `Board`, record owned by Player 1, and two `InvisiblePieces` records, owned by Player 1 and Player 2, respectively. Notice that the values for `cell_state` and `cell_occ` in the `Board` record are `1023u32` and `682u32`, respectively. These correspond to the initial board arrangement (see [Implementation Details](#implementation-details) above).
+There are three outputs here: the `Board` record, owned by Player 1, and two `InvisiblePieces` records, owned by Player 1 and Player 2, respectively. Notice that the values for `cell_state` and `cell_occ` in the `Board` record are `1023u32` and `682u32`, respectively. These correspond to the initial board arrangement (see [Implementation Details](#implementation-details) above).
 
 ### 3. Player 1 makes their first move
 
-Suppose that Player 1 rolls a 3 on the dice and wishes to move the game piece currently located on the 9th cell of the board to cell #12.
+Suppose that Player 1 rolls a 3 on the dice and wishes to move the game piece currently located on cell #9 to cell #12.
 
 This is the resulting board after this move is executed:
 
@@ -261,7 +261,7 @@ After processing the turn, two records are produced. The first record is the upd
 
 ### 3. Player 2 makes their first move
 
-It is now Player 2's turn to play. Suppose they roll a 2 on the dice and wish to move their piece to cell #12, but find that this cell is already occupied by a piece belonging to Player 1. Because the piece on cell #12 is unprotected, Player 2 may opt to exchange the positions of the two pieces, moving their own piece to cell #12 and Player 1's piece to cell #10. This move is legal according to the rules of the game and can be a strategic advantage for Player 2, as they are able to displace their opponent's piece and occupy a more favorable position on the board.
+It's now Player 2's turn to play. Suppose they roll a 2 on the dice and wish to move their piece to cell #12, but find that this cell is already occupied by a piece belonging to Player 1. Because the piece on cell #12 is unprotected, Player 2 may opt to exchange the positions of the two pieces, moving their own piece to cell #12 and Player 1's piece to cell #10. This move is legal according to the rules of the game and can be a strategic advantage for Player 2, as they are able to displace their opponent's piece and occupy a more favorable position on the board.
 
 This is the resulting board after this move is executed:
 
@@ -395,7 +395,7 @@ Once again, two records are produced. The first record is the updated `Board` re
 
 ### 5. Player 2 moves
 
-After Player 1 completes their turn, it is now Player 2's turn to play. Player 2 rolls a 3 on the dice and decides to move their game piece from cell #6 to cell #9. However, this move is found to be invalid because Player 1's pieces in cells 9 and 10 are protected due to their adjacency. In the game, a piece is considered protected if it is adjacent to another piece belonging to the same player. This means that Player 2's attempted move is blocked and they must choose a different move that does not violate this rule. This rule adds an element of strategy and challenge to the game, as players must consider the positioning of their pieces on the board and plan their moves accordingly in order to gain an advantage over their opponents.
+After Player 1 completes their turn, it is now Player 2's turn to play. Player 2 rolls a 3 on the dice and decides to move their game piece from cell #6 to cell #9. However, this move is found to be invalid because Player 1's pieces in cells 9 and 10 are protected due to their adjacency (in the game, a piece is considered protected if it is adjacent to another piece belonging to the same player). This means that Player 2's attempted move is blocked and they must choose a different move that does not violate this rule. This rule adds an element of strategy and challenge to the game, as players must consider the positioning of their pieces on the board and plan their moves accordingly in order to gain an advantage over their opponents.
 
 <img alt="player-2-move-cell-6-dice-3" width="1412" src=".resources/move-p2-6-3.png">
 
@@ -429,7 +429,7 @@ SnarkVM Error: Failed to evaluate instruction (assert.eq r42 true ;): 'assert.eq
 
 ### 6. Player 2 amends their move
 
-After the invalid move, Player 2 must try a different move using the same dice roll. They choose to move their game piece on cell #12 to cell #15, which is a special cell on the board, according to the rules of the game (see [The original Senet game](#the-original-senet-game) above). When a piece lands on cell #15, it becomes invisible and its position from now on is known only to the piece's owner.
+After making an invalid move, Player 2 must attempt a different move using the same dice roll. In this instance, they opt to move their game piece from cell #12 to cell #15, which is a special cell known as the "House of Second Life". Pieces that land on this cell become invisible and their position is only known to the owner from that point onward.
 
 This is the resulting board after this move is executed:
 
@@ -484,14 +484,13 @@ leo run move 12u8 3u8 "{
 
        Leo ✅ Executed 'zenet.aleo/move'
 ```
-Please note the `InvisiblePieces` record generated by this last move. It shows a value of `16384u32` for the `positions` field, which denotes that there's an invisible piece from Player 1 on cell #15. Also note, the `cell_state` and `cell_occ` from the `Board` record. These values denote that there's no piece on cell #15 due to it being invisible.
 
 After the last move, a new `InvisiblePieces` record is generated. This record contains information about the positions of Player 2's invisible pieces on the board. In this case, the record shows a value of `16384u32` for the `positions` field, which indicates that there is an invisible piece belonging to Player 2 on cell #15. Additionally, the `Board` record is updated to reflect the current state of the game. The `cell_state` and `cell_occ` fields indicate that there is no visible piece on cell #15, as it is currently occupied by the invisible piece belonging to Player 2. 
 
 
 ### 7. Player 1 moves to a cell where there's an invisible piece from the opponent
 
-Now let's make things a little bit more interesting. Let's suppose Player 1 rolls a 5 on the dice and decides to move the piece that's currently sitting on cell #10 to cell #15. Remember from the last move that there's an invisible piece belonging to Player 2 on cell #15. However, unless Player 1 has been paying close attention, they might have forgotten.
+Let's now add some excitement to the game. Suppose Player 1 rolls a 5 on the dice and chooses to move their piece from cell #10 to cell #15. It's important to recall that an invisible piece belonging to Player 2 is already present on cell #15 from the last move. However, unless Player 1 has been attentive, they may have forgotten about this invisible piece.
 
 This is the resulting board after this move is executed:
 
@@ -544,11 +543,11 @@ leo run move 10u8 5u8 "{
 
        Leo ✅ Executed 'zenet.aleo/move'
 ```
-Notice that now that Player 1 has also at least one invisible piece, the `positions` field in the `InvisiblePieces` record is no longer `0u32`.
+Notice that now that Player 1 has also invisible pieces, the `positions` field in the `InvisiblePieces` record is no longer `0u32`.
 
 ### 8. Player 1 moves again
 
-It's Player 1's turn again, given that they rolled a 5, in accordance to the rules of the game (see [The original Senet game](#the-original-senet-game) above). Let's suppose they roll a 3 and decide to move their piece on cell #15 to cell #18.
+Player 1's turn has come around again, as they rolled a 5 in accordance with the rules of the game (see [The original Senet game](#the-original-senet-game) above). Suppose they now roll a 3 and choose to move their game piece from cell #15 to cell #18.
 
 This is the resulting board after this move is executed:
 
