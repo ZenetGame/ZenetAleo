@@ -87,20 +87,18 @@ program zenet.aleo {
     }
 
     inline get_cell_type(i: u8) -> u8 {
-        if i == 15u8 {          // Cell #15 = House of Second Life
+        if i == 15u8 {          // Cell #15 = House of Second Life (Invisibility)
             return 1u8;         
-        } else if i == 20u8 {   // Cell #20 = House of Invisibility
-            return 2u8;
         } else if i == 26u8 {   // Cell #26 = House of Beauty
-            return 3u8;
+            return 2u8;
         } else if i == 27u8 {   // Cell #27 = House of Waters
-            return 4u8;
+            return 3u8;
         } else if i == 28u8 {   // Cell #28 = House of Three Judges
-            return 5u8;
+            return 4u8;
         } else if i == 29u8 {   // Cell #29 = House of Two Judges
-            return 6u8;
+            return 5u8;
         } else if i == 30u8 {   // Cell #30 = House of Horus
-            return 7u8;
+            return 6u8;
         } else {
             return 0u8;
         }
@@ -198,15 +196,13 @@ program zenet.aleo {
         };
      }
 
-    // If the piece on the origin cell is invisible, then it needs to continue
-    // to be invisible after being moved. This function moves the corresponding
-    // '1' from the origin bit to the target bit in the 'position' field.
-    function update_invisible_pieces(ip_positions: u32, origin_cell: u8, target_cell: u8) -> u32 {
-        if get_bit(ip_positions, origin_cell) {
-            set_bit(ip_positions, origin_cell, false);
-            set_bit(ip_positions, target_cell, true);
-        }
-        return ip_positions;
+    function clear_invisible_pieces(cells: Cells, ip_positions: u32) -> Cells {
+        let cell_state: u32 = cells.state.and(ip_positions.not());
+        let cell_occ: u32 = cells.occupant.and(ip_positions.not());
+        return Cells {
+            state: cell_state,
+            occupant: cell_occ
+        };
     }
 
     // Creates a new Board record and sets the owner to the caller, which from
@@ -320,8 +316,25 @@ program zenet.aleo {
             cells = exchange_pieces(cells, origin_cell, target_cell);
         }
 
-        // Updates the invisible pieces record according to reflect the current move.
-        let ip_positions: u32 = update_invisible_pieces(ip.positions, origin_cell, target_cell);
+        // If the piece on the origin cell is invisible, then it needs to continue
+        // to be invisible after being moved. This moves the corresponding
+        // '1' from the origin bit to the target bit in the 'positions' field.
+        let ip_positions: u32 = ip.positions;
+        if get_bit(ip_positions, origin_cell) {
+            ip_positions = set_bit(ip_positions, origin_cell, false);
+            ip_positions = set_bit(ip_positions, target_cell, true);
+        }
+        // Check if the piece that was must moved landed on cell #15 
+        // and should become invisible
+        if target_cell == 15u8 {
+            // Add a 1 to position #15 on ip_positions
+            ip_positions = ip_positions.or(16384u32);
+            // Drop piece from public Board since it's invisible
+            cells = clear_cell(cells, target_cell);
+        }
+
+        // Clears the current player's invisible pieces from the board after executing the move
+        cells = clear_invisible_pieces(cells, ip_positions);
 
         // By default, the next player is the current player.
         let next_player: address = board.owner;
