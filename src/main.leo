@@ -24,6 +24,7 @@ program zenet.aleo {
     // invisible pieces. The 'positions' field is also a 32-bit integer:
     //  - positions = 1 -> there's an invisible piece at that position
     //  - positions = 0 -> there's no invisible piece at that position
+
     record InvisiblePieces {
         owner: address,
         gates: u64,
@@ -239,7 +240,10 @@ program zenet.aleo {
     // | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |    =   1111111111b = 1023
     // | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
     // 
-    transition new(opponent: address) -> (Board, InvisiblePieces, InvisiblePieces) {
+    transition new(
+        opponent: address
+    ) -> (Board, InvisiblePieces, InvisiblePieces) {
+
         let opponent_address: address = opponent;
         return (Board {
             owner: self.caller,
@@ -272,7 +276,12 @@ program zenet.aleo {
     //                     will remain the same. The owner of this record is the player whose turn is next 
     //   - InvisiblePieces: the updated InvisiblePieces record after executing the move.
     //
-    transition make_move(origin_cell: u8, dice: u8, board: Board, ip: InvisiblePieces) -> (Board, InvisiblePieces) {
+    transition move(
+        origin_cell: u8, 
+        dice: u8, 
+        board: Board, 
+        ip: InvisiblePieces
+    ) -> (Board, InvisiblePieces) {
         // Validates that the board coming from the opponent is consistent with the invisible
         // pieces of the current player (if any). The owner of this record is the player that executed this move.
         assert (validate_board(board, ip));

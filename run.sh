@@ -83,7 +83,7 @@ echo "
 ########                                                               ########
 ###############################################################################
 "
-leo run make_move 9u8 3u8 "{
+leo run move 9u8 3u8 "{
   owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   gates: 0u64.private,
   cell_state: 1023u32.private,
@@ -112,7 +112,7 @@ echo "
 ###############################################################################
 "
 cat program_p2.json > program.json
-leo run make_move 10u8 1u8 "{
+leo run move 10u8 1u8 "{
   owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
   gates: 0u64.private,
   cell_state: 2815u32.private,
@@ -140,7 +140,7 @@ echo "
 ########                                                               ########
 ###############################################################################
 "
-leo run make_move 11u8 1u8 "{
+leo run move 11u8 1u8 "{
   owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
   gates: 0u64.private,
   cell_state: 3327u32.private,
@@ -168,7 +168,7 @@ echo "
 ########                                                               ########
 ###############################################################################
 "
-leo run make_move 8u8 5u8 "{
+leo run move 8u8 5u8 "{
   owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
   gates: 0u64.private,
   cell_state: 3327u32.private,
@@ -196,7 +196,7 @@ echo "
 ########                                                               ########
 ###############################################################################
 "
-leo run make_move 6u8 2u8 "{
+leo run move 6u8 2u8 "{
   owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
   gates: 0u64.private,
   cell_state: 7295u32.private,
@@ -225,7 +225,7 @@ echo "
 ###############################################################################
 "
 cat program_p1.json > program.json
-leo run make_move 7u8 1u8 "{
+leo run move 7u8 1u8 "{
   owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   gates: 0u64.private,
   cell_state: 7391u32.private,
@@ -254,7 +254,7 @@ echo "
 ########                                                               ########
 ###############################################################################
 "
-leo run make_move 11u8 1u8 "{
+leo run move 11u8 1u8 "{
   owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   gates: 0u64.private,
   cell_state: 7391u32.private,
@@ -282,7 +282,7 @@ echo "
 ########                                                               ########
 ###############################################################################
 "
-leo run make_move 8u8 1u8 "{
+leo run move 8u8 1u8 "{
   owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   gates: 0u64.private,
   cell_state: 7391u32.private,
@@ -310,7 +310,7 @@ echo "
 ########                                                               ########
 ###############################################################################
 "
-leo run make_move 11u8 3u8 "{
+leo run move 11u8 3u8 "{
   owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   gates: 0u64.private,
   cell_state: 7519u32.private,
@@ -339,7 +339,7 @@ echo "
 ###############################################################################
 "
 cat program_p2.json > program.json
-leo run make_move 13u8 3u8 "{
+leo run move 13u8 3u8 "{
   owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
   gates: 0u64.private,
   cell_state: 14687u32.private,
