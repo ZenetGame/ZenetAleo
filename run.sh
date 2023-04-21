@@ -70,7 +70,7 @@ echo "
 cat program_p1.json > program.json
 leo run new $PLAYER2_ADDRESS
 
-# Player 1 throws a 3 with their dice.
+# Player 1 makes their first move.
 echo "
 ###############################################################################
 ########                                                               ########
@@ -98,21 +98,21 @@ leo run move 9u8 3u8 "{
   _nonce: 1260228892496565700320197992505338749301641373211925149244050801561814298023group.public
 }"
 
-# Player 2 throws a 1 with their dice.
+# Player 2 makes their first move.
 echo "
 ###############################################################################
 ########                                                               ########
 ########            STEP 5: Player 2 makes their first move            ########
-########                        Dice roll: 1                           ########
+########                        Dice roll: 2                           ########
 ########                                                               ########
-########           | 1 | 2 | 1 | 2 | 1 | 2 | 1 | 2 | 0 | 0>|           ########
-########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2<|           ########
+########           | 1 | 2 | 1 | 2 | 1 | 2 | 1 | 2 | 0 | 1>|           ########
+########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2<| 0 |           ########
 ########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |           ########
 ########                                                               ########
 ###############################################################################
 "
 cat program_p2.json > program.json
-leo run move 10u8 1u8 "{
+leo run move 10u8 2u8 "{
   owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
   gates: 0u64.private,
   cell_state: 2815u32.private,
@@ -127,112 +127,28 @@ leo run move 10u8 1u8 "{
   _nonce: 1464789014133543903436410348591640130929288960599214445445608713474398327142group.public
 }"
 
-# Player 2 plays again because they threw a 1.
-echo "
-###############################################################################
-########                                                               ########
-########               STEP 6: Player 2 moves again                    ########
-########                        Dice roll: 1                           ########
-########                                                               ########
-########           | 1 | 2 | 1 | 2 | 1 | 2 | 1 | 2 | 0 | 0 |           ########
-########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2<|<1 |           ########
-########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |           ########
-########                                                               ########
-###############################################################################
-"
-leo run move 11u8 1u8 "{
-  owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
-  gates: 0u64.private,
-  cell_state: 3327u32.private,
-  cell_occ: 1194u32.private,
-  p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
-  p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
-  _nonce: 4690870848934773469079502278409118772518817469594601138224794335084520280518group.public
-}" "{
-  owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
-  gates: 0u64.private,
-  positions: 0u32.private,
-  _nonce: 1606512803048065953766948189257325132397836525666027848578385724640293241640group.public
-}"
-
-# Player 2 plays again because they threw a 1.
-echo "
-###############################################################################
-########                                                               ########
-########                STEP 7: Player 2 moves again                   ########
-########                        Dice roll: 5                           ########
-########                                                               ########
-########           | 1 | 2 | 1 | 2 | 1 | 2 | 1 | 0>| 0 | 0 |           ########
-########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2<| 2 | 1 |           ########
-########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |           ########
-########                                                               ########
-###############################################################################
-"
-leo run move 8u8 5u8 "{
-  owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
-  gates: 0u64.private,
-  cell_state: 3327u32.private,
-  cell_occ: 2218u32.private,
-  p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
-  p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
-  _nonce: 6253988530938785790439441431526714595230824765720776138754054138472794167427group.public
-}" "{
-  owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
-  gates: 0u64.private,
-  positions: 0u32.private,
-  _nonce: 4426926602005420266758862757591267950064155702590367142536192932884302440994group.public
-}"
-
-# Player 2 plays again because they threw a 5.
-echo "
-###############################################################################
-########                                                               ########
-########                STEP 8: Player 2 moves again                   ########
-########                        Dice roll: 2                           ########
-########                                                               ########
-########           | 1 | 2 | 1 | 2 | 1 | 0>| 1 |>2 | 0 | 0 |           ########
-########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 1 |           ########
-########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |           ########
-########                                                               ########
-###############################################################################
-"
-leo run move 6u8 2u8 "{
-  owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
-  gates: 0u64.private,
-  cell_state: 7295u32.private,
-  cell_occ: 6186u32.private,
-  p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
-  p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
-  _nonce: 1360964342624937223480310004498861222944995430813378620449009068059298906317group.public
-}" "{
-  owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
-  gates: 0u64.private,
-  positions: 0u32.private,
-  _nonce: 2389059089589441525145242263596535991557463561238588856227080122238976155581group.public
-}"
-
 # Player 1 plays next
 echo "
 ###############################################################################
 ########                                                               ########
-########                  STEP 9: Player 1 moves                       ########
-########                        Dice roll: 1                           ########
+########                  STEP 6: Player 1 moves                       ########
+########                        Dice roll: 2                           ########
 ########                                                               ########
-########           | 1 | 2 | 1 | 2 | 1 | 0 | 2>|>1 | 0 | 0 |           ########
-########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 1 |           ########
+########           | 1 | 2 | 1 | 2 | 1 | 2 | 0>| 2 |>1 | 1 |           ########
+########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 |           ########
 ########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |           ########
 ########                                                               ########
 ###############################################################################
 "
 cat program_p1.json > program.json
-leo run move 7u8 1u8 "{
+leo run move 7u8 2u8 "{
   owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   gates: 0u64.private,
-  cell_state: 7391u32.private,
-  cell_occ: 6282u32.private,
+  cell_state: 2815u32.private,
+  cell_occ: 2218u32.private,
   p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
-  _nonce: 4648419441858357408883486902975267928571056081285772427130512948096998661477group.public
+  _nonce: 5863476156890724550843040600428608701027004669580939694903504655995771483413group.public
 }" "{
   owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   gates: 0u64.private,
@@ -240,84 +156,88 @@ leo run move 7u8 1u8 "{
   _nonce: 1260228892496565700320197992505338749301641373211925149244050801561814298023group.public
 }"
 
-# Player 1 plays again because they threw a 1. This time the move is invalid because
-# player 2's pieces in cells 12 and 13 are protected.
+# Player 2 plays next. This time the move is invalid because player 1's pieces
+# in cells 9 and 10 are protected.
 echo "
 ###############################################################################
 ########                                                               ########
-########           STEP 10: Player 1 attempts an invalid move           ########
-########                        Dice roll: 1                           ########
-########                                                               ########
-########           | 1 | 2 | 1 | 2 | 1 | 0 | 2 | 1 | 0 | 0 |           ########
-########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2<|<1 |           ########
-########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |           ########
-########                                                               ########
-###############################################################################
-"
-leo run move 11u8 1u8 "{
-  owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
-  gates: 0u64.private,
-  cell_state: 7391u32.private,
-  cell_occ: 6218u32.private,
-  p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
-  p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
-  _nonce: 3948426659535155817986387150244593916337145649397527561770766560222778603929group.public
-}" "{
-  owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
-  gates: 0u64.private,
-  positions: 0u32.private,
-  _nonce: 2099817637539537283021802017101753525418623710989851309883267501444222856781group.public
-}"
-
-# Because the previous move was invalid, Player 1 tries a different move with the same dice roll.
-echo "
-###############################################################################
-########                                                               ########
-########               STEP 11: Player 1 amends his move                ########
-########                        Dice roll: 1                           ########
-########                                                               ########
-########           | 1 | 2 | 1 | 2 | 1 | 0 | 2 | 0>|>1 | 0 |           ########
-########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 1 |           ########
-########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |           ########
-########                                                               ########
-###############################################################################
-"
-leo run move 8u8 1u8 "{
-  owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
-  gates: 0u64.private,
-  cell_state: 7391u32.private,
-  cell_occ: 6218u32.private,
-  p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
-  p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
-  _nonce: 3948426659535155817986387150244593916337145649397527561770766560222778603929group.public
-}" "{
-  owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
-  gates: 0u64.private,
-  positions: 0u32.private,
-  _nonce: 2099817637539537283021802017101753525418623710989851309883267501444222856781group.public
-}"
-
-# Player 1 plays again because they threw a 1.
-echo "
-###############################################################################
-########                                                               ########
-########               STEP 12: Player 1 moves again                   ########
+########           STEP 7: Player 2 attempts an invalid move (!)       ########
 ########                        Dice roll: 3                           ########
 ########                                                               ########
-########           | 1 | 2 | 1 | 2 | 1 | 0 | 2 | 0 | 1 | 0 |           ########
-########           | 0 | 0 | 0 | 0 | 0 | 0 | 1<| 2 | 2 |<0 |           ########
+########           | 1 | 2 | 1 | 2 | 1 | 2>| 0 | 2 |>1!| 1 |           ########
+########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 |           ########
 ########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |           ########
 ########                                                               ########
 ###############################################################################
 "
-leo run move 11u8 3u8 "{
-  owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
+cat program_p2.json > program.json
+leo run move 6u8 3u8 "{
+  owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
   gates: 0u64.private,
-  cell_state: 7519u32.private,
-  cell_occ: 6218u32.private,
+  cell_state: 3007u32.private,
+  cell_occ: 2218u32.private,
   p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
-  _nonce: 4666265433961380448505648614738966685722508005289322014626060572623089873655group.public
+  _nonce: 6036362203879019831447420913205711606507044057841403559941745037099209138823group.public
+}" "{
+  owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
+  gates: 0u64.private,
+  positions: 0u32.private,
+  _nonce: 1464789014133543903436410348591640130929288960599214445445608713474398327142group.public
+}"
+
+# Because the previous move was invalid, Player 2 tries a different move with the same dice roll.
+# Because the piece lands on cell #15, the piece becomes invisible.
+echo "
+###############################################################################
+########                                                               ########
+########               STEP 8: Player 2 amends their move              ########
+########                        Dice roll: 3                           ########
+########                 Piece becomes invisible (*)                   ########
+########                                                               ########
+########           | 1 | 2 | 1 | 2 | 1 | 2 | 0 | 2 | 1 | 1 |           ########
+########           | 0 | 0 | 0 | 0 | 0 |*2<| 0 | 0 |<0 | 0 |           ########
+########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |           ########
+########                                                               ########
+###############################################################################
+"
+leo run move 12u8 3u8 "{
+  owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
+  gates: 0u64.private,
+  cell_state: 3007u32.private,
+  cell_occ: 2218u32.private,
+  p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
+  p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
+  _nonce: 6036362203879019831447420913205711606507044057841403559941745037099209138823group.public
+}" "{
+  owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
+  gates: 0u64.private,
+  positions: 0u32.private,
+  _nonce: 1464789014133543903436410348591640130929288960599214445445608713474398327142group.public
+}"
+
+# Player 1 plays next.
+echo "
+###############################################################################
+########                                                               ########
+########                   STEP 9: Player 1 moves                      ########
+########                        Dice roll: 5                           ########
+########                                                               ########
+########           | 1 | 2 | 1 | 2 | 1 | 2 | 0 | 2 | 1 | 0>|           ########
+########           | 0 | 0 | 0 | 0 | 0|*2*1<|0 | 0 | 0 | 0 |           ########
+########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |           ########
+########                                                               ########
+###############################################################################
+"
+cat program_p1.json > program.json
+leo run move 10u8 5u8 "{
+  owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
+  gates: 0u64.private,
+  cell_state: 959u32.private,
+  cell_occ: 170u32.private,
+  p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
+  p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
+  _nonce: 3971141806004630156214927014705437696910167048885340997783637456580646347901group.public
 }" "{
   owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   gates: 0u64.private,
@@ -325,32 +245,31 @@ leo run move 11u8 3u8 "{
   _nonce: 2790178789406900946219076845702115358906487119661751887534651560275067222863group.public
 }"
 
-# Player 2 plays next.
+# Player 1 plays next again (because they rolled a 5).
 echo "
 ###############################################################################
 ########                                                               ########
-########                 STEP 13: Player 2 moves                       ########
+########                STEP 10: Player 1 moves again                  ########
 ########                        Dice roll: 3                           ########
 ########                                                               ########
-########           | 1 | 2 | 1 | 2 | 1 | 0 | 2 | 0 | 1 | 0 |           ########
-########           | 0 | 0 | 0 | 0 | 2<| 0 | 1 |<0 | 2 | 0 |           ########
+########           | 1 | 2 | 1 | 2 | 1 | 2 | 0 | 2 | 1 | 0 |           ########
+########           | 0 | 0 |*1 | 0 | 0 |*2<| 0 | 0 | 0 | 0 |           ########
 ########           | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |           ########
 ########                                                               ########
 ###############################################################################
 "
-cat program_p2.json > program.json
-leo run move 13u8 3u8 "{
-  owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
+leo run move 15u8 3u8 "{
+  owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   gates: 0u64.private,
-  cell_state: 14687u32.private,
-  cell_occ: 6218u32.private,
+  cell_state: 447u32.private,
+  cell_occ: 170u32.private,
   p1: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   p2: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
-  _nonce: 5731086421104771502536010217708377290136681316803967986602526194450695880466group.public
+  _nonce: 6953544847073588504911484642740252760443414457882456614014267802834665825998group.public
 }" "{
-  owner: aleo1qttvkxx3expu6ueqlwrydt7v0xjpqzmayeqsqlyha8d74u6q5srqfun7cj.private,
+  owner: aleo172xc22y5jfzun0ezw7yfc55203sy6ufdvcugysqdw2ajpw86uc9q57enk3.private,
   gates: 0u64.private,
-  positions: 0u32.private,
-  _nonce: 2389059089589441525145242263596535991557463561238588856227080122238976155581group.public
+  positions: 16384u32.private,
+  _nonce: 5534725919850591397624943268698904780675877366552744519372352966937424067149group.public
 }"
 
