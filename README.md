@@ -1,5 +1,25 @@
 # The Game of Zenet
 
+## Table of Contents
+
+1. [The Game of Zenet](#The-Game-of-Zenet)
+2. [The original Senet game](#The-Original-Senet-Game)
+3. [Zenet: The Modern Version](#Zenet-The-Modern-Version)
+4. [Implementation Details](#Implementation-Details)
+   1. [Records](#Records)
+   2. [Transitions](#Transitions)
+5. [Records and Transitions Diagram](#Records-and-Transitions-Diagram)
+6. [How to Build](#How-to-Build)
+7. [Sample Gameplay](#Sample-Gameplay)
+   1. [Initializing the players](#1-Initializing-the-players)
+   2. [Player 1 creates a new Board](#2-Player-1-creates-a-new-Board)
+   3. [Player 1 makes their first move](#3-Player-1-makes-their-first-move)
+   4. [Player 2 makes their first move](#4-Player-2-makes-their-first-move)
+   5. [Player 2 makes an invalid move](#5-Player-2-makes-an-invalid-move)
+   6. [Player 2 amends their move](#6-Player-2-amends-their-move)
+   7. [Player 1 moves to a cell where there's an invisible piece from the opponent](#7-Player-1-moves-to-a-cell-where-there’s-an-invisible-piece-from-the-opponent)
+   8. [Player 1 moves again](#8-Player-1-moves-again)
+
 
 ## The original Senet game
 
@@ -393,7 +413,7 @@ leo run move 7u8 2u8 "{
 
 Once again, two records are produced. The first record is the updated `Board` record belonging to Player 2, while the second one is an `InvisiblePieces` record, belonging to Player 1. 
 
-### 5. Player 2 moves
+### 5. Player 2 makes an invalid move
 
 After Player 1 completes their turn, it is now Player 2's turn to play. Player 2 rolls a 3 on the dice and decides to move their game piece from cell #6 to cell #9. However, this move is found to be invalid because Player 1's pieces in cells 9 and 10 are protected due to their adjacency (in the game, a piece is considered protected if it is adjacent to another piece belonging to the same player). This means that Player 2's attempted move is blocked and they must choose a different move that does not violate this rule. This rule adds an element of strategy and challenge to the game, as players must consider the positioning of their pieces on the board and plan their moves accordingly in order to gain an advantage over their opponents.
 
