@@ -1,5 +1,7 @@
 # The Game of Zenet
 
+<img alt="zenet-logo" width="400" src=".resources/zenet-logo.png">
+
 ## Table of Contents
 
 1. [The Game of Zenet](#The-Game-of-Zenet)
