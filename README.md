@@ -1,6 +1,6 @@
 # The Game of Zenet
 
-<img alt="zenet-logo" width="400" src=".resources/zenet-logo.png">
+<img alt="zenet-banner" width="800" src=".resources/zenet-banner.png">
 
 ## Table of Contents
 
