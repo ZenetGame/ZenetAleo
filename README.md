@@ -46,7 +46,7 @@ To maintain privacy and ensure fair gameplay, Zenet uses zero-knowledge proofs t
 
 Using zero-knowledge proofs in Zenet adds an extra layer of intrigue and excitement, as players must constantly adapt to the hidden aspects of the game and make strategic decisions based on incomplete information.
 
-### Some benefits of Using Zero-Knowledge Proofs in Zenet:
+### Some Benefits of Using Zero-Knowledge Proofs in Zenet:
 - Privacy: Players' moves involving invisible pieces remain hidden, preserving the element of mystery and surprise throughout the game.
 - Security: Zero-knowledge proofs protect against cheating, ensuring that all moves are legal and follow the rules of the game without disclosing sensitive information.
 - Trust: The use of cryptographic techniques like zero-knowledge proofs establishes trust between players, as they can be confident that their opponent is not gaining an unfair advantage.
