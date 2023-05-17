@@ -1,3 +1,7 @@
 outputs/
 build/
 .vscode
+program_p1.json
+program_p2.json
+program.json
+.DS_Store
